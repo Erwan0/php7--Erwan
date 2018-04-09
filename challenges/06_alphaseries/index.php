@@ -1,3 +1,10 @@
+<?php
+
+$json = file_get_contents(__DIR__.'/data/shows.json');
+$shows = json_decode($json, true);
+$banner = $shows [array_rand($shows)]['images']['banner'];
+
+?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -29,17 +36,17 @@
         <div class="collapse navbar-collapse" id="navbar-menu">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="index.php">
                         <i class="fas fa-home"></i> Accueil
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="classement.html">
+                    <a class="nav-link" href="classement.php">
                          <i class="fas fa-trophy"></i> Classement
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="serie.html">
+                    <a class="nav-link" href="serie.php">
                         <i class="fas fa-random"></i> Une série aléatoire
                     </a>
                 </li>
@@ -58,7 +65,7 @@
     <main role="main">
         <!-- Header -->
         <div class="jumbotron" style="position: relative">
-            <div class="jumbotron-background" style="background-image: url('https://www.betaseries.com/images/fonds/banner/159_1451844073.jpg');"></div>
+            <div class="jumbotron-background" style="background-image: url('<?php echo $banner; ?>');"></div>
             <div class="container">
                 <h1 class="display-3">AlphaSeries</h1>
                 <p>Retrouvez les meilleures séries TV !</p>
@@ -77,7 +84,7 @@
                         <div class="card">
                           <img class="card-img-top" src="https://www.betaseries.com/images/fonds/banner/1161_1502049726.jpg">
                           <div class="card-body">
-                              <h5 class="card-title">#1 - <a href="serie.html">Game of Thrones</a></h5>
+                              <h5 class="card-title">#1 - <a href="serie.php">Game of Thrones</a></h5>
                               <p class="card-text">250 000 personnes regardent cette série.</p>
                           </div>
                         </div>
@@ -86,7 +93,7 @@
                         <div class="card">
                           <img class="card-img-top" src="https://www.betaseries.com/images/fonds/banner/1275_1362953209.jpg">
                           <div class="card-body">
-                              <h5 class="card-title">#2 - <a href="serie.html">The Walking Dead</a></h5>
+                              <h5 class="card-title">#2 - <a href="serie.php">The Walking Dead</a></h5>
                               <p class="card-text">175 000 personnes regardent cette série.</p>
                           </div>
                         </div>
@@ -95,13 +102,13 @@
                         <div class="card">
                           <img class="card-img-top" src="https://www.betaseries.com/images/fonds/banner/481_1362330654.jpg">
                           <div class="card-body">
-                              <h5 class="card-title">#3 - <a href="serie.html">Breaking Bad</a></h5>
+                              <h5 class="card-title">#3 - <a href="serie.php">Breaking Bad</a></h5>
                               <p class="card-text">150 000 personnes regardent cette série.</p>
                           </div>
                         </div>
                     </p>
                     <p>
-                        <a class="btn btn-outline-secondary" href="classement.html" role="button">
+                        <a class="btn btn-outline-secondary" href="classement.php" role="button">
                             <i class="fa fa-trophy"></i> Voir tout le classement
                         </a>
                     </p>
@@ -115,7 +122,7 @@
                         <div class="card">
                           <img class="card-img-top" src="https://www.betaseries.com/images/fonds/banner/12196_1452765061.jpg">
                           <div class="card-body">
-                              <h5 class="card-title">#1 - <a href="serie.html">CHROMA</a></h5>
+                              <h5 class="card-title">#1 - <a href="serie.php">CHROMA</a></h5>
                               <p class="card-text"><i class="fa fa-star text-info"></i> La série est notée 4.80 / 5</p>
                           </div>
                         </div>
@@ -124,7 +131,7 @@
                         <div class="card">
                           <img class="card-img-top" src="https://www.betaseries.com/images/fonds/banner/425_1363030684.jpg">
                           <div class="card-body">
-                              <h5 class="card-title">#2 - <a href="serie.html">The Wire</a></h5>
+                              <h5 class="card-title">#2 - <a href="serie.php">The Wire</a></h5>
                               <p class="card-text"><i class="fa fa-star text-info"></i> La série est notée 4.75 / 5</p>
                           </div>
                         </div>
@@ -133,13 +140,13 @@
                         <div class="card">
                           <img class="card-img-top" src="https://www.betaseries.com/images/fonds/banner/6323_1362236168.jpg">
                           <div class="card-body">
-                              <h5 class="card-title">#3 - <a href="serie.html">Crossed</a></h5>
+                              <h5 class="card-title">#3 - <a href="serie.php">Crossed</a></h5>
                               <p class="card-text"><i class="fa fa-star text-info"></i> La série est notée 4.70 / 5</p>
                           </div>
                         </div>
                     </p>
                     <p>
-                        <a class="btn btn-outline-secondary" href="classement.html" role="button">
+                        <a class="btn btn-outline-secondary" href="classement.php" role="button">
                             <i class="fa fa-trophy"></i> Voir tout le classement
                         </a>
                     </p>

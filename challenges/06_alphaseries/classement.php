@@ -1,4 +1,10 @@
-<!doctype html>
+<?php
+$json = file_get_contents(__DIR__.'/data/shows.json');
+$shows = json_decode($json, true);
+
+
+ ?>
+ <!doctype html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
@@ -277,3 +283,4 @@
         })
         </script>
     </body>
+    </html>
