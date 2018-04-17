@@ -8,7 +8,7 @@ $connection = new PDO($dsn, $user, $password);
 $statement = $connection->prepare("
     SELECT *
     FROM joueur
-    ORDER BY id ASC, name ASC, victoire ASC, defaite ASC, team ASC
+    ORDER BY id ASC, winrate ASC, name ASC, victoire ASC, defaite ASC, team ASC
 ");
 $statement->execute();
 $joueurs = $statement->fetchAll();
@@ -75,8 +75,10 @@ $joueurs = $statement->fetchAll();
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Joueur</th>
+                            <th scope="col">Win Rate</th>
                             <th scope="col">Victoire</th>
                             <th scope="col">Défaite</th>
+                            <th scope="col">KDA</th>
                             <th scope="col">Team</th>
 
                         </tr>
@@ -85,8 +87,10 @@ $joueurs = $statement->fetchAll();
                         <tr>
                             <td><?= $joueur['id'] ?></td>
                             <td><?= $joueur['name'] ?></td>
+                            <td><?= $joueur['winrate'] ?></td>
                             <td><?= $joueur['victoire'] ?></td>
                             <td><?= $joueur['defaite'] ?></td>
+                            <td><?= $joueur['KDA'] ?></td>
                             <td><?= $joueur['team'] ?></td>
                             <td style="text-align: right">
                                 <a href="Classement1.php?delete_id=<?= $joueur['id'] ?>">Supprimer</a>
