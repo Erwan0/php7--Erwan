@@ -1,17 +1,17 @@
 <?php
-// création de la connexion
-$dsn = 'mysql:dbname=projet;host=127.0.0.1';
-$user = 'root';
-$password = '';
-$connection = new PDO($dsn, $user, $password);
+
+require_once(__DIR__.'/src/bdd.php');
+require_once(__DIR__.'/src/app.php');
+
 // affichage du classemment
 $statement = $connection->prepare("
     SELECT *
     FROM joueur
-    ORDER BY id ASC, winrate ASC, name ASC, victoire ASC, defaite ASC, team ASC
+    ORDER BY  winrate DESC, id ASC, name ASC, victoire ASC, defaite ASC, team ASC
 ");
 $statement->execute();
 $joueurs = $statement->fetchAll();
+
 
  ?>
 

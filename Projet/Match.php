@@ -1,33 +1,27 @@
 <?php
-// création de la connexion
-$dsn = 'mysql:dbname=projet;host=127.0.0.1';
-$user = 'root';
-$password = '';
-$connection = new PDO($dsn, $user, $password);
-// suppression d'un joueur
-if (isset($_GET['delete_id'])) {
-    $statement = $connection->prepare("
-        DELETE
-        FROM joueur
-        WHERE id = :delete_id
-    ");
 
-    $statement->bindValue(':delete_id', $_GET['delete_id']);
-    $statement->execute();
-}
+require_once(__DIR__.'/src/bdd.php');
+
 // ajout d'un joueur
 if (isset($_POST['name'])) {
     $statement = $connection->prepare("
-        INSERT INTO joueur(name, victoire, defaite, team)
-        VALUES(:name, :victoire, :defaite, :team)
+        INSERT INTO joueur(name, victoire)
+        VALUES(:name, :victoire)
     ");
 
     $statement->bindValue(':name', $_POST['name']);
     $statement->bindValue(':victoire', $_POST['victoire']);
-    $statement->bindValue(':defaite', $_POST['defaite']);
-    $statement->bindValue(':team', $_POST['team']);
     $statement->execute();
 }
+
+// affichage de la liste
+$statement = $connection->prepare("
+    SELECT *
+    FROM joueur
+    ORDER BY victoire DESC, id ASC, name ASC
+");
+$statement->execute();
+$names = $statement->fetchAll();
  ?>
 
 <!doctype html>
@@ -80,25 +74,37 @@ if (isset($_POST['name'])) {
         <div class="container">
             <h2>Match :</h2>
 
-
+            <?php if (count($names) === 0) { ?>
                 <div class="alert alert-success" role="alert">
                     Il n'y a pas de joueur
                 </div>
-
+            <?php } else { ?>
             <hr />
 
             <div class="container">
-                <h2>Ajouter un joueur</h2>
+                <table class="table">
+                    <?php foreach ($names as $name) { ?>
+                        <tr>
+                            <td><?= $name['name'] ?></td>
+                            <td><?= $name['victoire'] ?></td>
+                            <td style="text-align: right">
+                                <a href="Match.php?delete_id=<?= $name['id'] ?>">Supprimer</a>
+                            <td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            <?php } ?>
                 <form action="Match.php" method="POST">
+                    <h2>Ajouter un joueur</h2>
                     <div class="form-group">
+                        <label for="Joueur">Joueur</label>
+                        <input name="name" type="name" class="form-control" id="name" placeholder="Nom du joueur"><br>
                     </div>
                     <div class="form-group">
-                        <label for="category">Joueur</label>
-                        <input name="joueur" type="joueur" class="form-control" id="joueur" placeholder="Nom du joueur"><br>
-
-
+                        <label for="Nombre de Victoire">Nombre de Victoire</label>
+                        <input name="victoire" type="victoire" class="form-control" id="victoire" placeholder="Nombre de victoire"><br>
+                    </div>
                         </select>
-                    </div>
                     <button type="submit" class="btn btn-primary">Ajouter un joueur</button><br><br>
                 </form>
             </div>
